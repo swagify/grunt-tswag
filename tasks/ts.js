@@ -330,7 +330,7 @@ function pluginFn(grunt) {
                     // !!! To do: To really be confident that the build was actually successful,
                     //   we have to check timestamps of the generated files in the destination.
                     var isSuccessfulBuild = !isError;
-                    if (isError && isOnlyTypeErrors && !options.failOnTypeErrors) {
+                    if (isOnlyTypeErrors && !options.failOnTypeErrors) {
                         isSuccessfulBuild = false;
                     }
 
