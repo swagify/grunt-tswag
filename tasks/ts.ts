@@ -359,7 +359,7 @@ function pluginFn(grunt: IGrunt) {
                         // !!! To do: To really be confident that the build was actually successful,
                         //   we have to check timestamps of the generated files in the destination.
                         var isSuccessfulBuild = !isError;
-                        if (isOnlyTypeErrors && options.failOnTypeErrors) {
+                        if (level1ErrorCount + level5ErrorCount + nonEmitPreventingWarningCount > 0 && isOnlyTypeErrors && options.failOnTypeErrors) {
                             isSuccessfulBuild = false;
                         }
 
