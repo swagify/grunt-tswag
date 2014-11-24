@@ -358,9 +358,10 @@ function pluginFn(grunt: IGrunt) {
 
                         // !!! To do: To really be confident that the build was actually successful,
                         //   we have to check timestamps of the generated files in the destination.
-                        var isSuccessfulBuild = (!isError ||
-                            (isError && isOnlyTypeErrors && !options.failOnTypeErrors)
-                        );
+                        var isSuccessfulBuild = !isError;
+                        if (isError && isOnlyTypeErrors && !options.failOnTypeErrors) {
+                            isSuccessfulBuild = false;
+                        }
 
                         if (isSuccessfulBuild) {
                             // Report successful build.
@@ -377,7 +378,7 @@ function pluginFn(grunt: IGrunt) {
                     });
             }
 
-            // Find out which files to compile, codegen etc. 
+            // Find out which files to compile, codegen etc.
             // Then calls the appropriate functions + compile function on those files
             function filterFilesAndCompile(): Promise<boolean> {
 
@@ -446,7 +447,7 @@ function pluginFn(grunt: IGrunt) {
                 }
 
                 ///// AMD loader
-                // Create the amdLoader if specified 
+                // Create the amdLoader if specified
                 if (!!amdloaderPath) {
                     var referenceOrder: amdLoaderModule.IReferences
                         = amdLoaderModule.getReferencesInOrder(referenceFile, referencePath, generatedFiles);
